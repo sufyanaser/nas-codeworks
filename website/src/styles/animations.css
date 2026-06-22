@@ -1,0 +1,45 @@
+/* NAS CodeWorks — Animations */
+/* Movement follows clarity — only purposeful motion */
+
+/* Fade in from below — section reveals */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Fragment drift toward center — Hero Phase 1 */
+@keyframes fragmentDrift {
+  0%   { opacity: 0; transform: translate(var(--drift-x, 8px), var(--drift-y, 8px)); }
+  100% { opacity: 1; transform: translate(0, 0); }
+}
+
+/* Path draw — Hero Phase 2 */
+@keyframes pathDraw {
+  from { stroke-dashoffset: var(--path-length, 200); opacity: 0.2; }
+  to   { stroke-dashoffset: 0; opacity: 0.8; }
+}
+
+/* Center emerge — Hero Phase 3 */
+@keyframes centerEmerge {
+  0%   { opacity: 0; transform: scale(0.85); }
+  60%  { opacity: 1; transform: scale(1.04); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Center pulse — gentle single pulse after emerge */
+@keyframes centerPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(46, 125, 122, 0.25); }
+  70%  { box-shadow: 0 0 0 16px rgba(46, 125, 122, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(46, 125, 122, 0); }
+}
+
+/* Utility classes */
+.animate-fade-up {
+  animation: fadeUp 0.5s ease-out both;
+}
+
+.animate-delay-1 { animation-delay: 0.1s; }
+.animate-delay-2 { animation-delay: 0.2s; }
+.animate-delay-3 { animation-delay: 0.3s; }
+.animate-delay-4 { animation-delay: 0.4s; }
+.animate-delay-5 { animation-delay: 0.5s; }

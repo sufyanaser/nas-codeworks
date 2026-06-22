@@ -1,0 +1,91 @@
+.intro {
+  max-width: 680px;
+  font-size: 1.0625rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  margin-top: var(--space-5);
+}
+
+.stepsSection {
+  margin-top: var(--space-10);
+}
+
+.principlesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+}
+
+.principleItem {
+  padding: var(--space-6);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.principleTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.principleDesc {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.faqSection { margin-top: var(--space-16); }
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-8);
+}
+
+.faqItem {
+  border-bottom: 1px solid var(--color-border);
+  padding-block: var(--space-5);
+}
+
+.faqQ {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: var(--space-3);
+}
+
+.faqA {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+}
+
+.ctaBox {
+  margin-top: var(--space-16);
+  padding: var(--space-10);
+  background-color: var(--color-primary);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 640px;
+}
+
+.ctaBoxTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.4;
+}
+
+.ctaBoxBody {
+  font-size: 0.9375rem;
+  color: rgba(246, 244, 239, 0.78);
+  line-height: 1.75;
+}

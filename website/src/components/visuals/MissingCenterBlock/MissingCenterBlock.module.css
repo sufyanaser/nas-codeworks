@@ -1,0 +1,52 @@
+.wrapper {
+  width: 100%;
+  max-width: 380px;
+  margin-inline: auto;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.emptyCenter {
+  fill: none;
+  stroke: rgba(39, 49, 58, 0.12);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
+}
+
+.emptyCenterLabel {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  fill: rgba(39, 49, 58, 0.20);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.emptyCenterSubLabel {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  fill: rgba(39, 49, 58, 0.28);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.fragment rect,
+.fragmentRect {
+  fill: rgba(242, 244, 243, 0.90);
+  stroke: rgba(39, 49, 58, 0.14);
+  stroke-width: 1;
+}
+
+.fragmentLabel {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 9.5px;
+  font-weight: 500;
+  fill: rgba(39, 49, 58, 0.45);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
