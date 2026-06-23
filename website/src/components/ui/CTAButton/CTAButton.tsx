@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { ScreenLink } from '../../../engine/ScreenLink'
 import styles from './CTAButton.module.css'
 
 interface CTAButtonProps {
@@ -30,7 +30,7 @@ export function CTAButton({
     .join(' ')
 
   if (to) {
-    return <Link to={to} className={className}>{children}</Link>
+    return <ScreenLink to={to} className={className}>{children}</ScreenLink>
   }
 
   if (href) {

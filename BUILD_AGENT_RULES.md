@@ -4,8 +4,9 @@ Use this file as an instruction header for Claude Code / Cursor / Codex.
 
 ## Mandatory behavior
 
-- Read `docs/00_START_HERE.md` first.
-- Read `docs/04-build/02_Website_Build_Execution_Prompt.md` before implementation.
+- Read `docs/00-authority/01_Project_Constitution_v2.md` first — it is the highest authority.
+- Read `docs/04-build/01_Website_UI_Build_Brief.md` before implementation.
+- Note: `02_Website_Build_Execution_Prompt.md` is archived in `docs/archived/` (superseded architecture) — do not build from it.
 - Do not redesign strategy.
 - Do not rewrite approved copy.
 - Do not add services.

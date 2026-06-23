@@ -18,7 +18,16 @@ html {
   lang: ar;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
+}
+
+/* Viewport Lock — No Global Scroll.
+   The document never scrolls as a whole; the Screen Engine's stage owns scrolling
+   (each active screen scrolls internally when its content overflows). */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 body {
@@ -29,6 +38,10 @@ body {
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
 }
 
 /* Typography Scale */

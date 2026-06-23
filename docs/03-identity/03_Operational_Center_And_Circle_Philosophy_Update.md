@@ -1,3 +1,8 @@
+> **Status:** Supporting
+> **Compatibility with Constitution v2:** Compatible (Operational Center philosophy — preserved; consolidated into §4)
+> **Authority:** docs/00-authority/01_Project_Constitution_v2.md
+> **Last reviewed:** 2026-06-23 (Constitution Migration Pass)
+
 # NAS CodeWorks — Operational Center & Circle Philosophy Update
 
 ## Strategic identity amendment

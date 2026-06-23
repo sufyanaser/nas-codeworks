@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { ScreenLink } from '../../../engine/ScreenLink'
 import styles from './ServicePathCard.module.css'
 
 interface ServicePathCardProps {
@@ -36,9 +36,9 @@ export function ServicePathCard({ label, title, problemSignal, description, outc
           <span className={styles.priceValue}>{price ?? 'حسب النطاق'}</span>
           {priceNote && <p className={styles.priceNote}>{priceNote}</p>}
         </div>
-        <Link to="/start" className={styles.cta}>
+        <ScreenLink to="/start" className={styles.cta}>
           هل هذه مشكلتك؟ ابدأ بوصفها
-        </Link>
+        </ScreenLink>
       </div>
     </div>
   )

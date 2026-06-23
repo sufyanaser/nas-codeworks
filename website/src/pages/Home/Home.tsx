@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async'
-import { Link } from 'react-router-dom'
+import { ScreenLink } from '../../engine/ScreenLink'
 import { OperationalCenterHero } from '../../components/visuals/OperationalCenterHero/OperationalCenterHero'
 import { MissingCenterBlock } from '../../components/visuals/MissingCenterBlock/MissingCenterBlock'
 import { SectionHeading } from '../../components/ui/SectionHeading/SectionHeading'
@@ -235,7 +235,7 @@ function ServicesOverviewSection() {
               <p style={{ fontSize: '0.8125rem', color: 'var(--color-secondary)', fontWeight: 500 }}>
                 {s.price}
               </p>
-              <Link
+              <ScreenLink
                 to={s.link}
                 style={{
                   fontSize: '0.875rem',
@@ -246,7 +246,7 @@ function ServicesOverviewSection() {
                 }}
               >
                 تفاصيل المسار ←
-              </Link>
+              </ScreenLink>
             </article>
           ))}
         </div>

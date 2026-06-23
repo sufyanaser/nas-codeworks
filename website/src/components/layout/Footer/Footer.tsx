@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { ScreenLink } from '../../../engine/ScreenLink'
 import styles from './Footer.module.css'
 
 export function Footer() {
@@ -17,20 +17,20 @@ export function Footer() {
           <div>
             <p className={styles.colTitle}>الصفحات</p>
             <div className={styles.links}>
-              <Link to="/">الرئيسية</Link>
-              <Link to="/services">الخدمات</Link>
-              <Link to="/how-we-work">طريقة العمل</Link>
-              <Link to="/case-studies">قصص المشاكل</Link>
-              <Link to="/start">ابدأ بوصف المشكلة الحالية</Link>
+              <ScreenLink to="/">الرئيسية</ScreenLink>
+              <ScreenLink to="/services">الخدمات</ScreenLink>
+              <ScreenLink to="/how-we-work">طريقة العمل</ScreenLink>
+              <ScreenLink to="/stories">قصص المشاكل</ScreenLink>
+              <ScreenLink to="/start">ابدأ بوصف المشكلة الحالية</ScreenLink>
             </div>
           </div>
 
           <div>
             <p className={styles.colTitle}>الخدمات</p>
             <div className={styles.links}>
-              <Link to="/services">تطبيقات سطح مكتب مخصصة</Link>
-              <Link to="/services">أنظمة أرشفة وإدارة ملفات</Link>
-              <Link to="/services">أتمتة التقارير وربط البيانات</Link>
+              <ScreenLink to="/services">تطبيقات سطح مكتب مخصصة</ScreenLink>
+              <ScreenLink to="/services">أنظمة أرشفة وإدارة ملفات</ScreenLink>
+              <ScreenLink to="/services">أتمتة التقارير وربط البيانات</ScreenLink>
             </div>
           </div>
         </div>
@@ -39,9 +39,9 @@ export function Footer() {
           <p className={styles.copyright}>
             © {new Date().getFullYear()} NAS CodeWorks — جميع الحقوق محفوظة
           </p>
-          <Link to="/start" className={styles.footerCta}>
+          <ScreenLink to="/start" className={styles.footerCta}>
             ابدأ بوصف المشكلة الحالية
-          </Link>
+          </ScreenLink>
         </div>
       </div>
     </footer>

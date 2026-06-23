@@ -1,3 +1,8 @@
+> **Status:** Supporting
+> **Compatibility with Constitution v2:** Partially Compatible — **Updated** in this pass to reflect §11 Experience Architecture (Interactive Executive Presentation, Operational Center Experience, Screen Engine, No Global Scroll, Desktop Renderer, Mobile Renderer, Hybrid Navigator, Guided Diagnostic Flow, Layered Interface, NAS Core Symbol)
+> **Authority:** docs/00-authority/01_Project_Constitution_v2.md
+> **Last reviewed:** 2026-06-23 (Constitution Migration Pass)
+
 # NAS CodeWorks — Website UI / Build Brief
 
 # Status
@@ -8,7 +13,34 @@
 
 وليست كوداً.
 
-هذه وثيقة توجيهية للتصميم والبناء، هدفها حماية التموضع والهوية أثناء تحويل النصوص المعتمدة إلى موقع فعلي.
+هذه وثيقة توجيهية للتصميم والبناء، هدفها حماية التموضع والهوية أثناء تحويل النصوص المعتمدة إلى تجربة فعلية.
+
+هذه الوثيقة تابعة للدستور **docs/00-authority/01_Project_Constitution_v2.md**. عند أي تعارض، الدستور هو المرجع.
+
+---
+
+# 0. Experience Architecture — Constitution v2 (Governing)
+
+هذا القسم يعكس **الاتجاه المعتمد الأحدث** (الدستور §11)، وهو يحكم بقية هذه الوثيقة. حيث ورد سابقاً وصف الموقع كـ "Multi-page marketing website" بتمرير طويل أو "mobile-first responsive" بـ Renderer واحد، فإن هذا القسم **يتقدّم عليه**. المحتوى المعتمد (الخدمات، الأسعار، CTA، منطق صفحة التواصل، فلسفة قصص المشاكل، الهوية البصرية) **محفوظ كما هو**.
+
+## التجربة المعتمدة
+
+* **Interactive Executive Presentation** — الموقع عرض تنفيذي تفاعلي موجَّه لصاحب القرار (مالك/مدير)، لا Brochure ثابت ولا صفحة تمرير سلبية.
+* **Operational Center Experience** — المركز التشغيلي ليس مجرد Hero، بل هو التجربة المنظِّمة لكل شاشة.
+* **Screen Engine** — المحتوى يُعرض كـ **شاشات/حالات منفصلة** يتقدّم بينها المستخدم بفعل واضح، لا كمستند واحد متصل.
+* **No Global Scroll** — لا اعتماد على تمرير عمودي عام طويل. كل شاشة مكتفية بذاتها؛ التمرير الداخلي مسموح فقط عند الضرورة (نماذج/فيض)، وليس كنموذج تنقّل أساسي.
+* **Desktop Renderer** — عرض مخصص لسطح المكتب لمحرّك الشاشات، مهيّأ للشاشات الكبيرة وإحساس العرض التنفيذي.
+* **Mobile Renderer** — عرض **مخصص** للجوال (وليس مجرد Responsive reflow)، يحافظ على تجربة الشاشات بلا تمرير عام.
+* **Hybrid Navigator** — تنقّل يجمع بين القائمة العليا والانتقال بين الشاشات؛ العنصر الأخير `ابدأ بوصف المشكلة` يعمل كـ Primary CTA. ممنوع أن يتحول إلى SaaS mega-menu أو يعرض Products/Pricing/Packages.
+* **Guided Diagnostic Flow** — صفحة التواصل/اكتشاف المشكلة تُقدَّم كتشخيص موجَّه خطوة بخطوة، يحافظ على كامل منطق صفحة التواصل المعتمد (الحقول، زر `إرسال وصف المشكلة`، رسالة النجاح).
+* **Layered Interface** — واجهة بطبقات (شاشة أساس ← طبقة المركز التشغيلي ← طبقات الـ fragments والعلاقات ← Overlays/Panels)، تعزّز قاعدة "المركز أهم من العناصر".
+* **NAS Core Symbol** — الرمز المركزي للعلامة الذي يمثّل المركز التشغيلي (دائرة/مركز غير مكتمل ينبثق من العناصر المنظَّمة ومساراتها). هو قلب تجربة المركز التشغيلي في كلا الـ Renderer-ين، ولا يرث أي شكل إذاعي/بث/موجة.
+
+## أثر ذلك على بقية الوثيقة
+
+* القسم 4 (Site Type) و12 (Layout/Section Rhythm) و22 (Technical Build): يُقرأان الآن ضمن نموذج **Screen Engine بلا تمرير عام مع Renderer منفصل للجوال**، لا ضمن صفحة تمرير طويلة.
+* تسلسل الأقسام (Home Section Flow، How We Work Visual Flow) يبقى صحيحاً **كترتيب شاشات/حالات**، لا كأقسام تمرير متتابعة.
+* CTA، الخدمات، الأسعار، منطق التواصل، وقصص المشاكل: **بلا تغيير**.
 
 ---
 
@@ -137,6 +169,8 @@ Home
 → الفهم
 → الثقة
 → وصف المشكلة
+
+> **تحديث Constitution v2 (§0, §11):** "Multi-page" هنا تعني **شاشات متعددة داخل Screen Engine بلا تمرير عام**، لا صفحات تمرير طويلة. يُقدَّم عبر **Desktop Renderer** و**Mobile Renderer** منفصلين، وتنقّل عبر **Hybrid Navigator**. التسلسل أعلاه هو ترتيب **الشاشات/الحالات**.
 
 ---
 
@@ -275,6 +309,8 @@ Home
 المركز لا يجب أن يكون دائرة إذاعية.
 
 إذا استُخدمت الدائرة، يجب أن تنبثق من العلاقات بين الأجزاء — لا أن تكون وعاءً يحتويها، ولا رمز بث أو موجة صوت.
+
+> **تحديث Constitution v2 (§11.10):** هذا العنصر المركزي هو **NAS Core Symbol** — الرمز المركزي المعتمد للعلامة الذي يمثّل المركز التشغيلي، وهو قلب التجربة في كلا الـ Renderer-ين (Desktop / Mobile).
 
 ---
 
@@ -487,6 +523,8 @@ Grid منظم يدعم RTL.
 → وضوح
 → ثقة
 → وصف المشكلة
+
+> **تحديث Constitution v2 (§11.3, §11.4, §11.9):** هذا الإيقاع يتحقق كـ **تتابع شاشات/طبقات** داخل Screen Engine، لا كأقسام تمرير عمودي متتالية. كل خطوة شاشة أو طبقة مكتفية بذاتها (No Global Scroll)، والانتقال بينها بفعل واضح عبر Hybrid Navigator.
 
 ## Page Width
 
@@ -798,6 +836,8 @@ Problem Recognition Through Real Stories.
 
 الزائر لا يشعر أنه يطلب مشروعاً.
 
+> **تحديث Constitution v2 (§11.8):** يُقدَّم هذا كـ **Guided Diagnostic Flow** — تشخيص موجَّه خطوة بخطوة داخل Screen Engine، لا نموذج طويل واحد بتمرير. الحقول والترتيب وزر `إرسال وصف المشكلة` ورسالة النجاح **بلا تغيير**.
+
 # Form Structure
 
 1. معلومات أساسية.
@@ -889,7 +929,9 @@ Problem Recognition Through Real Stories.
 
 ## القرار المقترح للنسخة الأولى
 
-موقع ثابت أو شبه ثابت، سريع وخفيف، Multi-page، Arabic-first.
+تجربة سريعة وخفيفة، Arabic-first، مبنية كـ **Screen Engine بلا تمرير عام (No Global Scroll)**، بـ **Desktop Renderer** و**Mobile Renderer** منفصلين، وتنقّل عبر **Hybrid Navigator**.
+
+> **تحديث Constitution v2 (§11):** يحلّ هذا محلّ الصياغة الأقدم "Multi-page marketing website" + "mobile-first responsive" بـ Renderer واحد. الجوال له Renderer مخصص يحافظ على تجربة الشاشات، لا مجرد إعادة تدفّق Responsive. تبقى الأولويات (سرعة، SEO أساسي، RTL صحيح، Accessibility، Form قابل للإرسال) كما هي.
 
 ## الأولوية
 

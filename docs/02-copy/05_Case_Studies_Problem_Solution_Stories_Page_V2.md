@@ -1,3 +1,8 @@
+> **Status:** Supporting
+> **Compatibility with Constitution v2:** Compatible (Case Studies philosophy — preserved)
+> **Authority:** docs/00-authority/01_Project_Constitution_v2.md
+> **Last reviewed:** 2026-06-23 (Constitution Migration Pass)
+
 # Case Studies / Problem-Solution Stories Page V2
 
 # قصص مشاكل تشبه ما يحدث داخل العمل اليومي

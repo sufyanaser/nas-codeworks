@@ -1,3 +1,8 @@
+> **Status:** Supporting
+> **Compatibility with Constitution v2:** Compatible (build-phase pointer updated)
+> **Authority:** docs/00-authority/01_Project_Constitution_v2.md
+> **Last reviewed:** 2026-06-23 (Constitution Migration Pass)
+
 # NAS CodeWorks — Start Here
 
 ## Project name
@@ -8,9 +13,13 @@ NAS CodeWorks
 
 Website execution.
 
+The single source of authority is now **docs/00-authority/01_Project_Constitution_v2.md**. Read it first.
+
 The next allowed task is:
 
-**تنفيذ الموقع بهذا البرومبت داخل أداة البناء المختارة**
+**تنفيذ الموقع وفق الدستور (Constitution v2) و `docs/04-build/01_Website_UI_Build_Brief.md` داخل أداة البناء المختارة**
+
+> ملاحظة: برومبت التنفيذ القديم (`02_Website_Build_Execution_Prompt.md`) نُقل إلى `docs/archived/` لأن معماريته (تمرير طويل، Renderer واحد) أصبحت متجاوَزة. اعتمد الدستور وملف البناء المحدّث بدلاً منه.
 
 ## What NAS CodeWorks is
 

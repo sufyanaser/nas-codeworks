@@ -1,0 +1,32 @@
+/* NAS CodeWorks — Screen Engine · Screen Container
+ * One active screen fills the stage. Long content scrolls *inside* the screen
+ * (local scroll) — there is no global document scroll (No Global Scroll rule).
+ */
+.container {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Placeholder transition only — a plain fade. Real GSAP timelines come in a later phase. */
+.enter {
+  animation: screenFadeIn 220ms ease-out both;
+}
+
+@keyframes screenFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter {
+    animation: none;
+  }
+}

@@ -1,3 +1,20 @@
+> **Status:** Archived
+> **Compatibility with Constitution v2:** Superseded
+> **Authority:** docs/00-authority/01_Project_Constitution_v2.md
+> **Last reviewed:** 2026-06-23 (Constitution Migration Pass)
+>
+> **Why archived:** This execution prompt is built around the earlier architecture of a
+> long-scrolling, single-renderer "multi-page marketing website" with mobile-first responsive
+> reflow and a fixed top-to-bottom Home scroll order. That architecture is **superseded** by the
+> latest approved direction in Constitution v2 §11 (Interactive Executive Presentation, Screen
+> Engine, No Global Scroll, separate Desktop / Mobile Renderers, Hybrid Navigator, Guided
+> Diagnostic Flow, Layered Interface, NAS Core Symbol).
+>
+> The approved strategy it carried — positioning, the three services, pricing, CTA architecture,
+> contact-form logic, colors, typography, SEO, and anti-patterns — is **preserved** and now lives
+> canonically in the Constitution and in the updated `docs/04-build/01_Website_UI_Build_Brief.md`.
+> This file is retained for history only and is **not authoritative**. Do not build from it.
+
 اعتمدت البرومبت على قواعد المشروع الحالية: الخدمات الثلاث فقط وعدم إضافة خدمات قبل الإطلاق، عدم نشر سعر Automation قبل الحسم، الالتزام بالموقع متعدد الصفحات، استخدام النسخ المعتمدة، وحماية التحديث الاستراتيجي الجديد **Operational Center**.         
 
 # NAS CodeWorks — Website Build Execution Prompt

@@ -1,0 +1,26 @@
+/* NAS CodeWorks — Renderer Foundations + Viewport Lock
+ * The shell fills the viewport and never scrolls as a whole (No Global Scroll).
+ * The active screen lives in `.stage`, which is the only positioned scroll context.
+ */
+.shell {
+  position: fixed;
+  inset: 0;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+/* The stage holds exactly one active screen (absolutely filled by ScreenContainer). */
+.stage {
+  position: relative;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+/* Renderer-specific foundation hooks (kept minimal in Phase 1). */
+.desktop {
+}
+.mobile {
+}

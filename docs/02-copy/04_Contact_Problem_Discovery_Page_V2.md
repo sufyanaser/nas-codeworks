@@ -1,3 +1,8 @@
+> **Status:** Supporting
+> **Compatibility with Constitution v2:** Compatible (Contact Page Logic — preserved; delivered via Guided Diagnostic Flow §11.8)
+> **Authority:** docs/00-authority/01_Project_Constitution_v2.md
+> **Last reviewed:** 2026-06-23 (Constitution Migration Pass)
+
 # Contact / Problem Discovery Page V2
 
 # قبل أن نفكر في الحل، نحتاج أن نفهم المشكلة

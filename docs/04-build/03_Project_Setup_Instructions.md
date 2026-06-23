@@ -1,3 +1,8 @@
+> **Status:** Supporting
+> **Compatibility with Constitution v2:** Compatible (build-prompt pointer updated — see note below)
+> **Authority:** docs/00-authority/01_Project_Constitution_v2.md
+> **Last reviewed:** 2026-06-23 (Constitution Migration Pass)
+
 # NAS CodeWorks — Project Setup Instructions
 
 ## Recommended path
@@ -12,10 +17,12 @@ C:\Projects\NAS CodeWorks
 C:\Projects\NAS CodeWorks
 │
 ├─ docs
+│  ├─ 00-authority
 │  ├─ 01-strategy
 │  ├─ 02-copy
 │  ├─ 03-identity
-│  └─ 04-build
+│  ├─ 04-build
+│  └─ archived
 │
 ├─ website
 └─ README.md
@@ -55,13 +62,17 @@ Do not scatter context files in the project root.
 
 ## First build prompt
 
-Use:
+The previous build prompt (`02_Website_Build_Execution_Prompt.md`) has been **archived** to
+`docs\archived\` because its long-scrolling, single-renderer architecture is superseded.
+
+Build direction now comes from:
 
 ```text
-docs\04-build\02_Website_Build_Execution_Prompt.md
+docs\00-authority\01_Project_Constitution_v2.md   (highest authority)
+docs\04-build\01_Website_UI_Build_Brief.md         (build brief, updated to Constitution v2)
 ```
 
-as the full prompt for the selected build tool.
+Read the Constitution first, then the UI / Build Brief, before any implementation.
 
 ## Build tool guidance
 

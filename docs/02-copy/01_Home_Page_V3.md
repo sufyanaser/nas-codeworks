@@ -1,3 +1,8 @@
+> **Status:** Supporting
+> **Compatibility with Constitution v2:** Compatible (approved copy — preserved verbatim; presentation distributes across screens per §11)
+> **Authority:** docs/00-authority/01_Project_Constitution_v2.md
+> **Last reviewed:** 2026-06-23 (Constitution Migration Pass)
+
 # Home Page V3
 
 # عندما لا تعود تعرف أين يقف العمل داخل شركتك
