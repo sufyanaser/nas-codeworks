@@ -16,6 +16,20 @@ export type ScreenId =
 /** Which renderer foundation is currently mounted. */
 export type RendererMode = 'desktop' | 'mobile'
 
+/** What triggered a navigation (drives analytics + transition semantics). */
+export type NavigationSource =
+  | 'initial' // first load / deep link
+  | 'jump' // navigator label / link (non-sequential)
+  | 'progress' // Recommended Next Step / journey advance|retreat
+  | 'keyboard' // arrow / page / enter keys
+  | 'history' // browser back/forward (popstate)
+
+/** Direction of a screen-to-screen move along the journey. */
+export type TransitionDirection = 'forward' | 'backward' | 'jump' | 'none'
+
+/** Reduced-motion preference (mirrors prefers-reduced-motion). */
+export type MotionPreference = 'full' | 'reduced'
+
 /** Lazy module shape produced by a screen loader (default export = screen content). */
 export type ScreenModule = { default: ComponentType }
 
@@ -32,6 +46,8 @@ export interface ScreenDefinition {
   title: string
   /** Whether the Hybrid Navigator surfaces this screen as a top-level item. */
   inNav: boolean
+  /** Whether the screen participates in the guided journey (Progress Mode). */
+  inJourney: boolean
   /** Ordering within the canonical forward path / navigator. */
   order: number
   /** Marks the primary-CTA navigation item (final nav label). */
@@ -49,6 +65,10 @@ export interface NavigationState {
   navigatorOpen: boolean
   /** True while a screen transition placeholder is running. */
   isTransitioning: boolean
+  /** Direction of the most recent move (drives the transition placeholder). */
+  direction: TransitionDirection
+  /** What triggered the most recent move. */
+  lastSource: NavigationSource
 }
 
 /** Intake draft — Guided Diagnostic Flow working state (foundation only). */
@@ -59,6 +79,7 @@ export interface EngineState {
   currentScreenId: ScreenId
   navigation: NavigationState
   renderer: RendererMode
+  motionPreference: MotionPreference
   intakeDraft: IntakeDraft
 }
 
@@ -68,6 +89,8 @@ export interface NavigateOptions {
   replace?: boolean
   /** Skip updating the browser URL (used by popstate sync). */
   skipUrl?: boolean
+  /** What triggered this navigation (analytics + transition semantics). */
+  source?: NavigationSource
 }
 
 /** Public engine API exposed through context. */

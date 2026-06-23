@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type {
   EngineState,
   IntakeDraft,
+  MotionPreference,
   NavigateOptions,
   RendererMode,
   ScreenEngineApi,
@@ -13,14 +14,22 @@ import type {
 } from './types'
 import { ScreenEngineContext } from './engineContext'
 import { DEFAULT_SCREEN_ID, getScreen, resolvePathToScreenId } from './screens'
+import { journeyDirection, journeyPosition, prevInJourney, recommendedNext } from './journey'
+import { emitNavigationEvent, registerDefaultNavigationListener } from './analytics'
 
 const MOBILE_QUERY = '(max-width: 767px)'
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 const INTAKE_STORAGE_KEY = 'nas:intakeDraft'
-const TRANSITION_MS = 220 // placeholder transition window (no GSAP in Phase 1)
+const TRANSITION_MS = 220 // placeholder transition window (no GSAP yet)
 
 function detectRenderer(): RendererMode {
   if (typeof window === 'undefined') return 'desktop'
   return window.matchMedia(MOBILE_QUERY).matches ? 'mobile' : 'desktop'
+}
+
+function detectMotion(): MotionPreference {
+  if (typeof window === 'undefined') return 'full'
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches ? 'reduced' : 'full'
 }
 
 function screenIdFromLocation(): ScreenId {
@@ -48,8 +57,11 @@ export function ScreenEngineProvider({ children }: { children: React.ReactNode }
         history: [currentScreenId],
         navigatorOpen: false,
         isTransitioning: false,
+        direction: 'none',
+        lastSource: 'initial',
       },
       renderer: detectRenderer(),
+      motionPreference: detectMotion(),
       intakeDraft: loadIntakeDraft(),
     }
   })
@@ -76,6 +88,10 @@ export function ScreenEngineProvider({ children }: { children: React.ReactNode }
       return
     }
 
+    const from = currentScreenRef.current
+    const source = options.source ?? 'jump'
+    const direction = journeyDirection(from, id)
+
     // Side effect (history mutation) lives here, in the event handler — not in the updater.
     if (!options.skipUrl && typeof window !== 'undefined') {
       const { path } = getScreen(id)
@@ -83,6 +99,19 @@ export function ScreenEngineProvider({ children }: { children: React.ReactNode }
       else window.history.pushState({ screenId: id }, '', path)
     }
     currentScreenRef.current = id
+
+    // Navigation Analytics Hook (no provider yet — emits to registered listeners only).
+    const pos = journeyPosition(id)
+    emitNavigationEvent({
+      type: 'screen_view',
+      screenId: id,
+      fromScreenId: from,
+      source,
+      direction,
+      step: pos.step,
+      total: pos.total,
+      timestamp: Date.now(),
+    })
 
     setState((prev) => ({
       ...prev,
@@ -92,6 +121,8 @@ export function ScreenEngineProvider({ children }: { children: React.ReactNode }
         history: [...prev.navigation.history, id],
         navigatorOpen: false,
         isTransitioning: true,
+        direction,
+        lastSource: source,
       },
     }))
   }, [])
@@ -115,7 +146,7 @@ export function ScreenEngineProvider({ children }: { children: React.ReactNode }
   useEffect(() => {
     function onPopState() {
       const id = screenIdFromLocation()
-      navigate(id, { skipUrl: true, replace: true })
+      navigate(id, { skipUrl: true, replace: true, source: 'history' })
     }
     window.addEventListener('popstate', onPopState)
     // Ensure the initial entry carries our state + canonical url.
@@ -137,6 +168,53 @@ export function ScreenEngineProvider({ children }: { children: React.ReactNode }
     mql.addEventListener('change', onChange)
     return () => mql.removeEventListener('change', onChange)
   }, [])
+
+  /* ── Motion preference: respond to prefers-reduced-motion changes ─────── */
+  useEffect(() => {
+    const mql = window.matchMedia(REDUCED_MOTION_QUERY)
+    function onChange() {
+      setState((prev) => {
+        const next: MotionPreference = mql.matches ? 'reduced' : 'full'
+        return next === prev.motionPreference ? prev : { ...prev, motionPreference: next }
+      })
+    }
+    mql.addEventListener('change', onChange)
+    return () => mql.removeEventListener('change', onChange)
+  }, [])
+
+  /* ── Keyboard navigation: advance/retreat along the journey ──────────── */
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      // Never hijack typing or modified shortcuts.
+      if (e.metaKey || e.ctrlKey || e.altKey) return
+      const target = e.target as HTMLElement | null
+      if (
+        target &&
+        (target.isContentEditable ||
+          target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          target.tagName === 'SELECT')
+      ) {
+        return
+      }
+
+      // RTL-aware: visual-left advances (next), visual-right retreats (prev).
+      const forward = e.key === 'ArrowLeft' || e.key === 'PageDown'
+      const backward = e.key === 'ArrowRight' || e.key === 'PageUp'
+      if (!forward && !backward) return
+
+      const here = currentScreenRef.current
+      const target2 = forward ? recommendedNext(here) : prevInJourney(here)
+      if (!target2) return
+      e.preventDefault()
+      navigate(target2, { source: 'keyboard' })
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [navigate])
+
+  /* ── Navigation analytics: register the provider-agnostic default listener ─ */
+  useEffect(() => registerDefaultNavigationListener(), [])
 
   /* ── Document title per active screen ────────────────────────────────── */
   useEffect(() => {

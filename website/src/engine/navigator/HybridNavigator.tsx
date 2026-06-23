@@ -1,14 +1,53 @@
-/* NAS CodeWorks — Hybrid Navigator (foundation)
- * Phase 1: structure only. Combines top-level navigation with the engine's active-screen
- * state. Screen-to-screen "progression" affordances and final visual polish come later.
+/* NAS CodeWorks — Hybrid Navigator
+ * Combines top-level navigation (Jump Mode) with the guided journey (Progress Mode).
+ * Jump Mode = the approved nav labels. Progress Mode = step counter + prev/next along the
+ * canonical forward path, driven by the journey state machine. Final visual polish later.
  */
-import type { RendererMode } from '../types'
+import type { RendererMode, ScreenId } from '../types'
 import { useScreenEngine } from '../engineContext'
 import { ScreenLink } from '../ScreenLink'
 import { navScreens } from '../screens'
+import { journeyPosition, prevInJourney, recommendedNext } from '../journey'
 import styles from './HybridNavigator.module.css'
 
 const NAV = navScreens()
+
+/** Progress Mode: step indicator + prev/next affordances along the guided journey. */
+function ProgressControls({ current, variant }: { current: ScreenId; variant: 'bar' | 'sheet' }) {
+  const { navigate } = useScreenEngine()
+  const pos = journeyPosition(current)
+  const prev = prevInJourney(current)
+  const next = recommendedNext(current)
+
+  // Nothing to progress to (shouldn't happen on journey screens, but stay defensive).
+  if (!prev && !next) return null
+
+  return (
+    <div className={variant === 'bar' ? styles.progress : styles.sheetProgress} aria-label="التقدم في الرحلة">
+      <button
+        type="button"
+        className={styles.progressBtn}
+        onClick={() => prev && navigate(prev, { source: 'progress' })}
+        disabled={!prev}
+      >
+        السابق
+      </button>
+      {pos.inJourney && (
+        <span className={styles.progressStep} aria-live="polite">
+          الخطوة {pos.step} من {pos.total}
+        </span>
+      )}
+      <button
+        type="button"
+        className={styles.progressBtn}
+        onClick={() => next && navigate(next, { source: 'progress' })}
+        disabled={!next}
+      >
+        التالي
+      </button>
+    </div>
+  )
+}
 
 export function HybridNavigator({ mode }: { mode: RendererMode }) {
   const { currentScreenId, navigation, toggleNavigator, closeNavigator } = useScreenEngine()
@@ -41,6 +80,7 @@ export function HybridNavigator({ mode }: { mode: RendererMode }) {
             ),
           )}
         </nav>
+        <ProgressControls current={currentScreenId} variant="bar" />
       </header>
     )
   }
@@ -78,6 +118,7 @@ export function HybridNavigator({ mode }: { mode: RendererMode }) {
               {s.label}
             </ScreenLink>
           ))}
+          <ProgressControls current={currentScreenId} variant="sheet" />
         </nav>
       )}
     </>
