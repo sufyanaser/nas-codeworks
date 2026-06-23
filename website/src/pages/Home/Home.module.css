@@ -27,7 +27,77 @@
   max-width: 520px;
 }
 
+.heroLede {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  line-height: 1.6;
+  max-width: 520px;
+}
+
 .heroCtas { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+
+/* Shared prose */
+.para {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.85;
+  max-width: 760px;
+  margin-top: var(--space-4);
+}
+.paraStrong {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  line-height: 1.7;
+  max-width: 760px;
+  margin-top: var(--space-5);
+}
+.bodyList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+  max-width: 760px;
+}
+.bodyList li {
+  position: relative;
+  padding-inline-start: var(--space-5);
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+.bodyList li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
+}
+
+/* Prose on dark (Philosophy) */
+.paraOnDark {
+  font-size: 1.0625rem;
+  color: rgba(246, 244, 239, 0.78);
+  line-height: 1.85;
+  margin-top: var(--space-4);
+}
+.paraOnDarkStrong {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: #fff;
+  margin-top: var(--space-5);
+}
+.bodyListOnDark li {
+  color: rgba(246, 244, 239, 0.78);
+}
+.bodyListOnDark li::before {
+  background-color: var(--color-secondary);
+}
 
 /* Recognition */
 .recognitionGrid {
@@ -130,6 +200,46 @@
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
   margin-top: var(--space-8);
+}
+
+.serviceCard {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background-color: var(--color-bg);
+}
+.serviceNum {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+}
+.serviceTitle {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  line-height: 1.4;
+}
+.serviceDesc {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+  flex-grow: 1;
+}
+.servicePrice {
+  font-size: 0.8125rem;
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+.serviceLink {
+  font-size: 0.875rem;
+  color: var(--color-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
 }
 
 /* Outcomes */

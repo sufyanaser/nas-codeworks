@@ -6,6 +6,50 @@
   margin-top: var(--space-5);
 }
 
+.para {
+  max-width: 760px;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.85;
+  margin-top: var(--space-4);
+}
+.paraStrong {
+  max-width: 760px;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  line-height: 1.7;
+  margin-top: var(--space-5);
+}
+.bodyList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+  max-width: 760px;
+}
+.bodyList li {
+  position: relative;
+  padding-inline-start: var(--space-5);
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+.bodyList li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
+}
+.block {
+  margin-top: var(--space-16);
+}
+
 .servicesStack {
   display: flex;
   flex-direction: column;
