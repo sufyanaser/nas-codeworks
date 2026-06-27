@@ -1,4 +1,4 @@
-/* NAS CodeWorks — Hybrid Navigator (foundation, structure only — no final polish) */
+/* NAS CodeWorks — Hybrid Navigator */
 
 .bar {
   flex: 0 0 auto;
@@ -9,17 +9,67 @@
   padding-inline: var(--content-padding);
   padding-block: var(--space-3);
   border-bottom: 1px solid var(--color-border);
-  background: var(--color-bg);
+  background: var(--color-surface);
+  backdrop-filter: blur(18px);
 }
 
 .brand {
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
   color: var(--color-primary);
-  font-size: 1.0625rem;
   white-space: nowrap;
 }
-.brand span {
-  color: var(--color-secondary);
+
+.brandMark {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 46% 52%, var(--color-center-core-soft), transparent 62%);
+  box-shadow: 0 0 34px var(--color-center-glow);
+}
+
+.brandArc {
+  position: absolute;
+  inset: 5px;
+  border: 3px solid var(--color-secondary);
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+  transform: rotate(-18deg);
+}
+
+.brandBlocks,
+.brandBlocks::before,
+.brandBlocks::after {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 2px;
+  background: var(--color-secondary-alt);
+  content: '';
+}
+
+.brandBlocks { top: 9px; inset-inline-end: 5px; }
+.brandBlocks::before { top: 8px; inset-inline-start: -5px; opacity: 0.68; }
+.brandBlocks::after { top: 17px; inset-inline-start: 1px; opacity: 0.46; }
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.brandText strong {
+  font-weight: 700;
+  line-height: 1.1;
+  font-size: 1rem;
+}
+.brandText strong span { color: var(--color-secondary); }
+.brandText small {
+  color: var(--color-text-light);
+  font-size: 0.72rem;
+  font-weight: 500;
 }
 
 .items {
@@ -34,6 +84,7 @@
   font-size: 0.9375rem;
   color: var(--color-text-muted);
 }
+.item:hover { color: var(--color-primary); background: var(--color-surface-solid); }
 .item[aria-current='page'] {
   color: var(--color-secondary);
   font-weight: 600;
@@ -41,14 +92,24 @@
 
 .cta {
   padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-pill);
   background: var(--color-secondary);
   color: var(--color-bg);
   font-weight: 600;
   font-size: 0.9375rem;
+  box-shadow: 0 14px 34px var(--color-center-glow);
 }
 
-/* Progress Mode (guided journey: step indicator + prev/next) */
+.themeToggle {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-muted);
+  background: var(--color-surface-solid);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
 .progress {
   display: flex;
   align-items: center;
@@ -67,12 +128,14 @@
   color: var(--color-text-muted);
   background: transparent;
 }
-.progressBtn:disabled {
-  opacity: 0.4;
-  cursor: default;
+.progressBtn:disabled { opacity: 0.4; cursor: default; }
+
+.mobileActions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
-/* Mobile trigger */
 .trigger {
   display: inline-flex;
   flex-direction: column;
@@ -85,7 +148,6 @@
   background: var(--color-primary);
 }
 
-/* Mobile sheet */
 .sheet {
   position: absolute;
   inset: 0;
@@ -102,10 +164,7 @@
   color: var(--color-text-muted);
   border-bottom: 1px solid var(--color-border);
 }
-.sheetItem[aria-current='page'] {
-  color: var(--color-secondary);
-  font-weight: 600;
-}
+.sheetItem[aria-current='page'] { color: var(--color-secondary); font-weight: 600; }
 .sheetClose {
   align-self: flex-start;
   padding: var(--space-2) var(--space-3);
@@ -118,4 +177,9 @@
   margin-top: var(--space-4);
   padding-top: var(--space-4);
   border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 1120px) {
+  .items,
+  .progress { display: none; }
 }
