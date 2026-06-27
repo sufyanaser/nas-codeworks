@@ -1,14 +1,22 @@
-/* NAS CodeWorks — Design Tokens */
+/* NAS CodeWorks — Design Tokens
+ * Two complete color systems are supported: Light and Dark.
+ * Both preserve the same philosophy: operational center, muted teal, ink navy, warm off-white.
+ */
 
 :root {
-  /* Colors */
+  color-scheme: light;
+
+  /* Core colors — Light Mode */
   --color-primary: #17212B;
   --color-primary-alt: #1E2A36;
   --color-secondary: #2E7D7A;
   --color-secondary-alt: #3A8F8A;
   --color-bg: #F6F4EF;
   --color-bg-alt: #F2F4F3;
+  --color-bg-soft: #FBFAF6;
   --color-bg-dark: #17212B;
+  --color-surface: rgba(255, 255, 255, 0.72);
+  --color-surface-solid: #FFFFFF;
   --color-text: #1A1D21;
   --color-text-muted: #27313A;
   --color-text-light: #5A6270;
@@ -17,11 +25,18 @@
   --color-border: rgba(26, 29, 33, 0.10);
   --color-border-strong: rgba(26, 29, 33, 0.18);
 
-  /* Fragment colors (Operational Center Hero) */
-  --color-fragment: rgba(39, 49, 58, 0.38);
-  --color-fragment-label: rgba(39, 49, 58, 0.55);
+  /* Operational center visual tokens */
+  --color-center-core: #2E7D7A;
+  --color-center-core-soft: rgba(46, 125, 122, 0.12);
+  --color-center-glow: rgba(46, 125, 122, 0.22);
   --color-path: rgba(46, 125, 122, 0.30);
-  --color-path-end: rgba(46, 125, 122, 0.80);
+  --color-path-strong: rgba(46, 125, 122, 0.78);
+  --color-fragment: rgba(39, 49, 58, 0.42);
+  --color-fragment-bg: rgba(255, 255, 255, 0.82);
+  --color-fragment-label: rgba(39, 49, 58, 0.64);
+  --color-signal-blue: #3A8F8A;
+  --color-signal-violet: #4757A8;
+  --color-signal-amber: #C98A2E;
 
   /* Spacing */
   --space-1: 4px;
@@ -43,10 +58,12 @@
   --radius-md: 8px;
   --radius-lg: 16px;
   --radius-xl: 24px;
+  --radius-pill: 999px;
 
   /* Shadows */
   --shadow-card: 0 1px 4px rgba(23, 33, 43, 0.06), 0 0 0 1px rgba(23, 33, 43, 0.06);
-  --shadow-elevated: 0 4px 16px rgba(23, 33, 43, 0.10);
+  --shadow-elevated: 0 16px 60px rgba(23, 33, 43, 0.12);
+  --shadow-center: 0 28px 100px var(--color-center-glow);
 
   /* Transitions */
   --transition-fast: 150ms ease-out;
@@ -57,6 +74,44 @@
   --content-width: 1100px;
   --content-width-narrow: 720px;
   --content-padding: var(--space-6);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-primary: #F6F4EF;
+  --color-primary-alt: #D7E0E0;
+  --color-secondary: #4DB6AE;
+  --color-secondary-alt: #62C9C0;
+  --color-bg: #0B121A;
+  --color-bg-alt: #111B25;
+  --color-bg-soft: #141F2B;
+  --color-bg-dark: #081018;
+  --color-surface: rgba(20, 31, 43, 0.72);
+  --color-surface-solid: #111B25;
+  --color-text: #F6F4EF;
+  --color-text-muted: #C9D1D2;
+  --color-text-light: #8EA0A4;
+  --color-accent: #D49A3A;
+  --color-accent-alt: #E4B25F;
+  --color-border: rgba(246, 244, 239, 0.10);
+  --color-border-strong: rgba(246, 244, 239, 0.18);
+
+  --color-center-core: #4DB6AE;
+  --color-center-core-soft: rgba(77, 182, 174, 0.14);
+  --color-center-glow: rgba(77, 182, 174, 0.24);
+  --color-path: rgba(77, 182, 174, 0.32);
+  --color-path-strong: rgba(77, 182, 174, 0.82);
+  --color-fragment: rgba(246, 244, 239, 0.44);
+  --color-fragment-bg: rgba(17, 27, 37, 0.82);
+  --color-fragment-label: rgba(246, 244, 239, 0.74);
+  --color-signal-blue: #6EB6D8;
+  --color-signal-violet: #7782DB;
+  --color-signal-amber: #D49A3A;
+
+  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(246, 244, 239, 0.04);
+  --shadow-elevated: 0 18px 70px rgba(0, 0, 0, 0.32);
+  --shadow-center: 0 30px 110px var(--color-center-glow);
 }
 
 @media (max-width: 768px) {
