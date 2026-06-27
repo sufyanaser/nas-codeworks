@@ -1,8 +1,8 @@
 /* NAS CodeWorks — Hybrid Navigator
  * Combines top-level navigation (Jump Mode) with the guided journey (Progress Mode).
- * Jump Mode = the approved nav labels. Progress Mode = step counter + prev/next along the
- * canonical forward path, driven by the journey state machine. Final visual polish later.
+ * The brand mark is an incomplete operational C: it references CodeWorks and the open center philosophy.
  */
+import { useEffect, useState } from 'react'
 import type { RendererMode, ScreenId } from '../types'
 import { useScreenEngine } from '../engineContext'
 import { ScreenLink } from '../ScreenLink'
@@ -11,6 +11,18 @@ import { journeyPosition, prevInJourney, recommendedNext } from '../journey'
 import styles from './HybridNavigator.module.css'
 
 const NAV = navScreens()
+
+type ThemeMode = 'light' | 'dark'
+
+function initialTheme(): ThemeMode {
+  try {
+    const stored = window.localStorage.getItem('nas-codeworks-theme')
+    if (stored === 'light' || stored === 'dark') return stored
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  } catch {
+    return 'light'
+  }
+}
 
 /** Progress Mode: step indicator + prev/next affordances along the guided journey. */
 function ProgressControls({ current, variant }: { current: ScreenId; variant: 'bar' | 'sheet' }) {
@@ -51,11 +63,43 @@ function ProgressControls({ current, variant }: { current: ScreenId; variant: 'b
 
 export function HybridNavigator({ mode }: { mode: RendererMode }) {
   const { currentScreenId, navigation, toggleNavigator, closeNavigator } = useScreenEngine()
+  const [theme, setTheme] = useState<ThemeMode>(initialTheme)
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    document.documentElement.style.colorScheme = theme
+    try {
+      window.localStorage.setItem('nas-codeworks-theme', theme)
+    } catch {
+      // Theme persistence is non-critical.
+    }
+  }, [theme])
+
+  const nextTheme: ThemeMode = theme === 'dark' ? 'light' : 'dark'
 
   const brand = (
     <ScreenLink to="/" className={styles.brand} aria-label="NAS CodeWorks — الرئيسية">
-      NAS <span>CodeWorks</span>
+      <span className={styles.brandMark} aria-hidden="true">
+        <span className={styles.brandArc} />
+        <span className={styles.brandBlocks} />
+      </span>
+      <span className={styles.brandText}>
+        <strong>NAS <span>CodeWorks</span></strong>
+        <small>استوديو حلول تشغيلية</small>
+      </span>
     </ScreenLink>
+  )
+
+  const themeButton = (
+    <button
+      type="button"
+      className={styles.themeToggle}
+      onClick={() => setTheme(nextTheme)}
+      aria-label={theme === 'dark' ? 'تفعيل الوضع الفاتح' : 'تفعيل الوضع الداكن'}
+      title={theme === 'dark' ? 'الوضع الفاتح' : 'الوضع الداكن'}
+    >
+      {theme === 'dark' ? 'Light' : 'Dark'}
+    </button>
   )
 
   if (mode === 'desktop') {
@@ -80,6 +124,7 @@ export function HybridNavigator({ mode }: { mode: RendererMode }) {
             ),
           )}
         </nav>
+        {themeButton}
         <ProgressControls current={currentScreenId} variant="bar" />
       </header>
     )
@@ -90,17 +135,20 @@ export function HybridNavigator({ mode }: { mode: RendererMode }) {
     <>
       <header className={styles.bar}>
         {brand}
-        <button
-          type="button"
-          className={styles.trigger}
-          aria-label="فتح القائمة"
-          aria-expanded={navigation.navigatorOpen}
-          onClick={toggleNavigator}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+        <div className={styles.mobileActions}>
+          {themeButton}
+          <button
+            type="button"
+            className={styles.trigger}
+            aria-label="فتح القائمة"
+            aria-expanded={navigation.navigatorOpen}
+            onClick={toggleNavigator}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </header>
 
       {navigation.navigatorOpen && (
